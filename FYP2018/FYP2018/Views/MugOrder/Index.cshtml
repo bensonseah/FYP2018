@@ -1,0 +1,51 @@
+﻿@{ // TODO P03 1-4: Strongly typed this view to list of mug orders
+}
+
+
+@{
+    ViewBag.Title = "Mug Orders";
+}
+
+<h2>Mug Orders</h2>
+
+<span style="color:red">@TempData["Msg"]</span>
+<p>
+    <a asp-controller="MugOrder" asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Color</th>
+        <th>Qty</th>
+        @if (User.IsInRole("Admin"))
+        {
+            <th>Created By</th>
+        }
+    </tr>
+
+    @if (Model != null)
+    {
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Id
+                </td>
+                <td>
+                    @item.Color
+                </td>
+                <td>
+                    @item.Qty
+                </td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>
+                        @item.CreatedBy
+                    </td>
+
+                }
+            </tr>
+        }
+    }
+</table>

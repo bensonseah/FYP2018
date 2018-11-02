@@ -1,0 +1,88 @@
+﻿@{
+    var mugOrders = ViewData["mugOrders"];  // modify this line to convert the list to proper type
+    var shirtOrders = ViewData["shirtOrders"]; // modify this line to convert the list to proper type
+    var users = ViewData["users"]; // modify this line to convert the list to proper type
+}
+<div class="container">
+    <h2>Sales Report</h2>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#Step1">Step 1: Union both mug and shirt orders</a></li>
+        <li><a data-toggle="tab" href="#Step2">Step 2: Group and sorted by CreatedBy, ProductType showing total quantity </a></li>
+        <li><a data-toggle="tab" href="#FinalStep">Final Step: Inner join with AppUsers to show Total Quantity sold grouped by User (Name), Product Type</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="Step1" class="tab-pane fade in active">
+            <div>
+                @{
+                    // to be implemented
+                    var sequence1 = mugOrders; // This line needs to be changed
+
+                    var sequence2 = shirtOrders; // This line needs to be changed
+
+                    var unionSeq = new List<dynamic>(); // This line needs to be changed. Union sequence1 and sequence2
+                }
+                <table class="table table-bordered table-condensed table-hover table-striped">
+                    <tr>
+                        <th>ProductType</th>
+                        <th>Qty</th>
+                        <th>CreatedBy</th>
+                    </tr>
+                    @foreach (var r in unionSeq)
+                    {
+                        <tr>
+                            <td>@r.ProductType</td>
+                            <td>@r.Qty</td>
+                            <td>@r.CreatedBy</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        <div id="Step2" class="tab-pane fade">
+            @{
+                var groupedResult = unionSeq; // This line needs to be changed. Grouped by multiple columns
+
+            }
+            <div>
+                <table class="table table-bordered table-condensed table-hover table-striped">
+                    <tr>
+                        <th>UserId</th>
+                        <th>ProductType</th>
+                        <th>TotalQty</th>
+                    </tr>
+                    @foreach (var r in groupedResult)
+                    {
+                        <tr>
+                            <td>@r.UserId</td>
+                            <td>@r.ProductType</td>
+                            <td>@r.TotalQty</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        <div id="FinalStep" class="tab-pane fade">
+            <div>
+                @{
+                    var summary = groupedResult; // This line needs to be changed. User inner join with users
+                }
+                <table class="table table-bordered table-condensed table-hover table-striped">
+                    <tr>
+                        <th>User</th>
+                        <th>ProductType</th>
+                        <th>TotalQty</th>
+                    </tr>
+                    @foreach (var r in summary)
+                    {
+                        <tr>
+                            <td>@r.User</td>
+                            <td>@r.ProductType</td>
+                            <td>@r.TotalQty</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

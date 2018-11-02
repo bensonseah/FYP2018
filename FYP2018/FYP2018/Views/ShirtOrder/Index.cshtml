@@ -1,0 +1,26 @@
+﻿<!-- To be implemented -->
+@{
+    ViewBag.Title = "Shirt Orders";
+}
+
+<h2>Shirt Orders</h2>
+
+<p>
+    <a asp-controller="ShirtOrder" asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Qty</th>
+        <th>Subtotal</th>
+        @if (User.IsInRole("Admin"))
+        {
+            <th>Created By</th>
+        }
+    </tr>
+
+</table>
+<h3>Pending Implementation</h3>
